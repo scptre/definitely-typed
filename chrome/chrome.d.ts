@@ -6,6 +6,13 @@
 /// <reference path='../webrtc/MediaStream.d.ts'/>
 
 ////////////////////
+// Global object
+////////////////////
+interface Window {
+    chrome: typeof chrome;
+}
+
+////////////////////
 // Alarms
 ////////////////////
 declare module chrome.alarms {
@@ -1538,7 +1545,8 @@ declare module chrome.runtime {
     }
 
     interface Port {
-        postMessage: Function;
+        postMessage: (message: Object) => void;
+        disconnect: () => void;
         sender?: MessageSender;
         onDisconnect: chrome.events.Event;
         onMessage: PortMessageEvent;
@@ -2243,7 +2251,7 @@ declare module chrome.webRequest {
     }
 
     interface UploadData {
-        bytes?: any[];
+        bytes?: ArrayBuffer;
         file?: string;
     }
 
@@ -2321,7 +2329,7 @@ declare module chrome.webRequest {
     }
 
     interface RequestBody {
-        raw?: UploadData;
+        raw?: UploadData[];
         error?: string;
         formData?: FormData;
     }
