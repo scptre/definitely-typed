@@ -603,3 +603,4 @@ interface HTMLElement {
     selectize: Selectize.IApi<any, any>;
 }
 
+export = Selectize;
